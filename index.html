@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Agenda Maquillaje</title>
+  <meta name="theme-color" content="#b0306a">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Agenda">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <h1>💄 Agenda</h1>
+    <div id="account" class="account"></div>
+  </header>
+
+  <div id="banner"></div>
+
+  <main id="view"></main>
+
+  <button id="fab" class="fab" aria-label="Nueva cita">＋</button>
+
+  <nav class="tabs">
+    <button data-view="day" class="active"><span>📅</span>Día</button>
+    <button data-view="upcoming"><span>📋</span>Próximas</button>
+    <button data-view="month"><span>🗓️</span>Mes</button>
+    <button data-view="budgets"><span>💰</span>Presupuestos</button>
+    <button data-view="settings"><span>⚙️</span>Ajustes</button>
+  </nav>
+
+  <dialog id="dlg">
+    <form id="apptForm" novalidate>
+      <header>
+        <h2 id="dlgTitle">Nueva cita</h2>
+        <button type="button" class="icon-btn" data-close aria-label="Cerrar">✕</button>
+      </header>
+      <div class="form-body">
+        <label>Clienta *<input name="client" required autocomplete="off" placeholder="Nombre y apellido"></label>
+        <label>WhatsApp<input name="whatsapp" type="tel" inputmode="tel" placeholder="11 2345 6789"></label>
+        <label>Servicio *<select name="service"></select></label>
+        <label id="otherSvcWrap" hidden>¿Qué servicio?<input name="serviceOther" placeholder="Ej: Maquillaje artístico"></label>
+        <div class="row">
+          <label>Duración (min)<input name="duration" type="number" min="15" step="15" required></label>
+          <label>Personas<input name="people" type="number" min="1" value="1"></label>
+        </div>
+        <div class="row">
+          <label>Fecha *<input name="date" type="date" required></label>
+          <label>Hora de llegada *<input name="time" type="time" step="300" required></label>
+        </div>
+        <div id="slots" class="slots"></div>
+        <label>Dirección<input name="address" autocomplete="off" placeholder="Calle 123, barrio"></label>
+        <label>Tiempo de viaje desde casa (min)<input name="travel" type="number" min="0" step="5"></label>
+        <div id="leaveInfo" class="leave-info"></div>
+        <div class="row">
+          <label>Precio ($)<input name="price" type="number" min="0" inputmode="numeric"></label>
+          <label>Seña ($)<input name="deposit" type="number" min="0" inputmode="numeric"></label>
+        </div>
+        <label>Notas<textarea name="notes" rows="2" placeholder="Ej: novia + madrina, piel sensible…"></textarea></label>
+      </div>
+      <footer>
+        <button type="button" id="delBtn" class="btn danger">Eliminar</button>
+        <span class="spacer"></span>
+        <button type="button" class="btn" data-close>Cancelar</button>
+        <button type="submit" class="btn primary" id="saveBtn">Guardar</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
